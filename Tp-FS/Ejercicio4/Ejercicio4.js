@@ -22,5 +22,3 @@ function wordCounter(nameFile, word){
         return `La palabra ${word} no aparece`
     }
 }
-
-console.log(wordCounter("archivo2", `"hola"`))
