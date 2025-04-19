@@ -1,5 +1,5 @@
 import express from 'express';
-import sprintController from '../controllers/sprintsController';
+import sprintController from '../controllers/sprintsController.js';
 const route = express.Router();
 
 route.get('/', sprintController.getAll);

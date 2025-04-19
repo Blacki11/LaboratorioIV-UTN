@@ -1,10 +1,8 @@
 import mongoose from 'mongoose';
 
-const backlogtSchema = new mongoose.Schema({
-    taskReference: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task', required: true }]
-
+const backlogSchema = new mongoose.Schema({
+  taskReferences: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }]
 });
 
-const Backlog = mongoose.model('Backlog', backlogtSchema);
-
+const Backlog = mongoose.model('Backlog', backlogSchema);
 export default Backlog;
