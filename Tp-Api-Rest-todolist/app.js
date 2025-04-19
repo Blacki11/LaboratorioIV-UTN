@@ -1,17 +1,16 @@
 import express from 'express';
 import 'dotenv/config';
 import router from './routers/index.js';
+import connectDB from './config/dbClient.js';
 
 const app = express()
 
+app.use(express.json());
 app.use("/", router)
 
-try {
-    const PORT = process.env.PORT || 3000
-    app.listen(3000, () => {
-        console.log('Server is running on port '+PORT)
-    })
-}
-catch (error) {
-    console.error('Error:', error.message)
-}
+await connectDB();
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(' Server is running on port ' + PORT);
+});
