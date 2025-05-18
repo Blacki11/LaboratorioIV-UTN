@@ -26,30 +26,34 @@ const getByIdLibro = async(req,res)=>{
 // routers.put("/:id", libroController())
 const actualizarLibro = async (req,res)=>{
     try{
+        
         const {id} = req.params
-        const {nombre, bio, fechaNacimiento, nacionalidad, libros} = req.body
-        const autor = await libros.findById(id)
-        if(!autor){
+        const {titulo, resumen, genero, publicacion, disponible} = req.body
+        console.log(req.body)
+        const libro = await libros.findById(id)
+        if(!libro){
             return res.status(404).json({error: "Libro no encontrado"})
         }
-        if(nombre){
-            autor.nombre = nombre
+        if(titulo){
+            libro.titulo = titulo
         }
-        if(bio){
-            autor.bio = bio
+        if(resumen){
+            libro.resumen = resumen
         }   
-        if(fechaNacimiento){
-            autor.fechaNacimiento = fechaNacimiento
+        if(genero){
+            libro.genero = genero
         }
-        if(nacionalidad){
-            autor.nacionalidad = nacionalidad
+        if(publicacion){
+            libro.publicacion = publicacion
         }
-        if(libros){
-            autor.libros = libros
+        if(disponible){
+            libro.disponible = disponible
         }
         await libro.save()
+        console.log(libro)
         return res.status(200).json(libro)
     }catch(err){
+        console.log(err)
         return res.status(500).json({error: "Error en el servidor"})
     }
 }
@@ -58,14 +62,13 @@ const actualizarLibro = async (req,res)=>{
 const postNewLibro = (req,res)=>{
     try{
 
-        const {titulos, resumen, genero, publicacion, disponible} = req.body
-        if(!titulos || !genero || !publicacion || !disponible){
+        const {titulo, resumen, genero, publicacion, disponible} = req.body
+        if(!titulo || !genero || !publicacion){
             return res.status(400).json({error: "Faltan datos"})
         }
         const libro = {}
-
-        if(titulos){
-            libro.titulos = titulos
+        if(titulo){
+            libro.titulo = titulo
         }
         if(resumen){
             libro.resumen = resumen
@@ -79,10 +82,12 @@ const postNewLibro = (req,res)=>{
         if(disponible){
             libro.disponible = disponible
         }
+
         const nuevoLibro = new libros(libro)
         nuevoLibro.save()
         return res.status(201).json(nuevoLibro)
     }catch(err){
+        console.log(err)
         return res.status(500).json({error: "Error en el servidor"})
     }
 

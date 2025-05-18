@@ -74,9 +74,9 @@ const addBookAutor = async (req,res)=>{
 // routers.post("/", autorController())
 const postNewAutor = (req,res)=>{
     try{
-
+        
         const {nombre, bio, fechaNacimiento, nacionalidad, libros} = req.body
-        if(!nombre || !fechaNacimiento || !nacionalidad || !libros){
+        if(!nombre || !fechaNacimiento || !nacionalidad){
             return res.status(400).json({error: "Faltan datos"})
         }
         const autor = {}

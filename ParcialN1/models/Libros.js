@@ -15,7 +15,7 @@ const bookSchema = mongoose.Schema({
         require: true
 
     },
-    publicaicon: {
+    publicacion: {
         type: Date,
         require: true
 
@@ -26,6 +26,6 @@ const bookSchema = mongoose.Schema({
 
     }
 })
-const Book = mongoose.model("libros", bookSchema)
+const Book = mongoose.model("books", bookSchema)
 module.exports = Book
 

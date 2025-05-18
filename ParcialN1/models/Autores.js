@@ -11,20 +11,21 @@ const authorSchema = mongoose.Schema({
 
     },
     fechaNacimiento: {
-        type: String,
+        type: Date,
         require: true
 
     },
     nacionalidad: {
-        type: Date,
+        type: String,
         require: true
 
     },
     libros: {
         type: [{type: mongoose.Types.ObjectId, ref: "libros"}],
+        default: []
     }
 })
 
-const Author = mongoose.model("autores", authorSchema)
+const Author = mongoose.model("authors", authorSchema)
 module.exports = Author
 
