@@ -1,4 +1,4 @@
-const autores = require("../models/autores.js");
+const autores = require("../models/Autores.js");
 const libros = require("../models/libros.js");
 
 
@@ -110,7 +110,7 @@ const postNewAutor = (req,res)=>{
 const deleteAutor = async (req, res)=>{
     try{
         const {id} = req.params
-        const autor = await autores.Remove({_id: id})
+        const autor = await autores.remove({_id: id})
         return res.status(200).json(autor)
     }catch(err){
         return res.status(500).json({error: "Error en el servidor"})
