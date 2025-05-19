@@ -4,7 +4,7 @@ const authorSchema = mongoose.Schema({
 
     nombre: {
         type: String,
-        require: true
+        required: true
     },
     bio: {
         type: String,
@@ -12,12 +12,12 @@ const authorSchema = mongoose.Schema({
     },
     fechaNacimiento: {
         type: Date,
-        require: true
+        required: true
 
     },
     nacionalidad: {
         type: String,
-        require: true
+        required: true
 
     },
     libros: {

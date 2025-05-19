@@ -11,6 +11,6 @@ routers.get("/:id", getByIdLibro)
 routers.put("/:id", actualizarLibro)
 
 routers.post("/", postNewLibro)
-routers.delete("/:id", validationAssignetAuthor,deleteLibro)
+routers.delete("/:id", validationAssignetAuthor, deleteLibro)
 
 module.exports = routers;

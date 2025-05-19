@@ -51,6 +51,7 @@ const actualizarAutor = async (req,res)=>{
         await autor.save()
         return res.status(200).json(autor)
     }catch(err){
+        console.log(err)
         return res.status(500).json({error: "Error en el servidor"})
     }
 }
@@ -63,21 +64,30 @@ const addBookAutor = async (req,res)=>{
             return res.status(404).json({error: "Autor no encontrado"})
         }
         const libro = await libros.findById(bookId)
+        autor.libros.map((e)=>{
+           if(bookId == e){
+            return res.status(404).json({error: "El libro que se intenta agregar ya fue agregado"})
+           }
+        })
         autor.libros.push(libro._id)
         await autor.save()
         return res.status(200).json(autor)
     }catch(err){
+        console.log(err)
         return res.status(500).json({error: "Error en el servidor"})
     }
 }
 
 // routers.post("/", autorController())
-const postNewAutor = (req,res)=>{
+const postNewAutor = async (req,res)=>{
     try{
         
         const {nombre, bio, fechaNacimiento, nacionalidad, libros} = req.body
         if(!nombre || !fechaNacimiento || !nacionalidad){
             return res.status(400).json({error: "Faltan datos"})
+        }
+        if(typeof nombre != "string" || typeof bio != "string" || typeof nacionalidad != "string"){
+            return res.status(400).json({error: "Se deben usar los tipos correctos de datos"})
         }
         const autor = {}
         if(!autor){
@@ -99,7 +109,7 @@ const postNewAutor = (req,res)=>{
             autor.libros = libros
         }
         const nuevoAutor = new autores(autor)
-        nuevoAutor.save()
+        await nuevoAutor.save()
         return res.status(201).json(nuevoAutor)
     }catch(err){
         return res.status(500).json({error: "Error en el servidor"})
@@ -110,9 +120,10 @@ const postNewAutor = (req,res)=>{
 const deleteAutor = async (req, res)=>{
     try{
         const {id} = req.params
-        const autor = await autores.remove({_id: id})
+        const autor = await autores.deleteOne({_id: id})
         return res.status(200).json(autor)
     }catch(err){
+        console.log(err)
         return res.status(500).json({error: "Error en el servidor"})
     }
 }

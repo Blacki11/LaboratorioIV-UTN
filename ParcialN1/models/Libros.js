@@ -4,7 +4,7 @@ const bookSchema = mongoose.Schema({
 
     titulo: {
         type: String,
-        require: true
+        required: true
     },
     resumen: {
         type: String,
@@ -12,17 +12,17 @@ const bookSchema = mongoose.Schema({
     },
     genero: {
         type: String,
-        require: true
+        required: true
 
     },
     publicacion: {
         type: Date,
-        require: true
+        required: true
 
     },
     disponible: {
         type: Boolean,
-        require: true
+        required: true
 
     }
 })
